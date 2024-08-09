@@ -10,7 +10,7 @@ namespace Accurate_Finance.Domain
         public double Credit { get; set; }
         public double Debit { get; set; }
 
-        public CashFlow(double credit, double debit, string fone, string email, string cpf)
+        public CashFlow(double credit, double debit)
         {
             Id++;
             Credit = credit;
