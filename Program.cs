@@ -8,11 +8,25 @@ namespace Accurate_Finance
     {
         static void Main(string[] args)
         {
-            RepositoryAccountant repositoryAccountant = new RepositoryAccountant();
-            ServiceAccountant serviceAccountant = new ServiceAccountant(repositoryAccountant);
-            ServiceDBFake serviceDBFake = new ServiceDBFake(repositoryAccountant);
-            serviceDBFake.CreateTables();
-            serviceAccountant.ShowAccountants();
+            try
+            {
+                // Accountant
+                RepositoryAccountant repositoryAccountant = new RepositoryAccountant();
+                ServiceAccountant serviceAccountant = new ServiceAccountant(repositoryAccountant);
+
+                //Transaction
+                RepositoryTransaction repositoryTransaction = new RepositoryTransaction();
+                ServiceTransaction serviceTransaction = new ServiceTransaction(repositoryTransaction);
+
+                ServiceDBFake serviceDBFake = new ServiceDBFake(repositoryAccountant, repositoryTransaction);
+                serviceDBFake.CreateTables();
+                serviceAccountant.ShowAccountants();
+                serviceTransaction.ShowTransactions();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
